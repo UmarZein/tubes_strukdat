@@ -15,6 +15,7 @@ struct Koneksi{
 struct Siswa{
     std::string nama, nim;
     Koneksi *koneksi;
+    int tingkat;
     Siswa *next;
 };
 struct MLLSiswa{
@@ -26,12 +27,12 @@ struct MLLMatkul{
 
 Matkul *createMatkul(std::string nama, std::string kode, int sks, int tingkat);
 Koneksi *createKoneksi(Matkul *mk);
-Siswa *createSiswa(std::string nama, std::string nim);
+Siswa *createSiswa(std::string nama, std::string nim, int tingkat);
 void initMLLSiswa(MLLSiswa &mll);
 void initMLLMatkul(MLLMatkul &mll);
 
 Matkul *insertMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks, int tingkat);
-Siswa *insertSiswa(MLLSiswa &mll, std::string nama, std::string nim);
+Siswa *insertSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat);
 
 void deleteSiswa(MLLSiswa &mll, Siswa *s);
 void deleteMatkul(MLLSiswa &mlls, MLLMatkul &mllm, Matkul *m);

@@ -15,10 +15,11 @@ Koneksi *createKoneksi(Matkul *mk) {
     k->next = nullptr;
     return k;
 }
-Siswa *createSiswa(std::string nama, std::string nim) {
+Siswa *createSiswa(std::string nama, std::string nim, int tingkat) {
     Siswa *s = new Siswa; ///
     s->nama = nama;
     s->nim = nim;
+    s->tingkat = tingkat;
     s->koneksi = nullptr;
     s->next = nullptr;
     return s;
@@ -43,9 +44,9 @@ Matkul *insertMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks
     }
     return x;
 }
-Siswa *insertSiswa(MLLSiswa &mll, std::string nama, std::string nim){
+Siswa *insertSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat){
     Siswa *m = mll.first;
-    Siswa *x = createSiswa(nama, nim);
+    Siswa *x = createSiswa(nama, nim, tingkat);
     if (m==nullptr){
         mll.first = x;
     } else {
@@ -57,6 +58,10 @@ Siswa *insertSiswa(MLLSiswa &mll, std::string nama, std::string nim){
     return x;
 }
 void connect(Siswa *s, Matkul* m){
+    if (m->tingkat>s->tingkat){
+        std::cout << "tingkat siswa dibawah tingkat mata pelajaran\n";
+        return;
+    }
     Koneksi *k = s->koneksi;
     if (k==nullptr){
         s->koneksi = createKoneksi(m);

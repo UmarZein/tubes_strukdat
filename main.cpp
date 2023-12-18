@@ -5,10 +5,10 @@ int main(){
     MLLSiswa mlls;
     initMLLMatkul(mllm);
     initMLLSiswa(mlls);
-    Siswa *anas = insertSiswa(mlls, "Anas", "F001");
-    Siswa *boris = insertSiswa(mlls, "Boris", "F002");
-    Siswa *ceri = insertSiswa(mlls, "Ceri", "K001");
-    Siswa *deni = insertSiswa(mlls, "Dani", "K001");
+    Siswa *anas = insertSiswa(mlls, "Anas", "F001", 1);
+    Siswa *boris = insertSiswa(mlls, "Boris", "F002", 2);
+    Siswa *ceri = insertSiswa(mlls, "Ceri", "K001", 2);
+    Siswa *deni = insertSiswa(mlls, "Deni", "K001", 1);
 
     Matkul *mtk = insertMatkul(mllm, "matematika", "mtk", 6, 1);
     Matkul *ipa = insertMatkul(mllm, "ipa", "ipa", 6, 1);
@@ -45,15 +45,11 @@ int main(){
 
     std::cout << "-----------\n";
     printSiswaMatkul(mlls, mllm);
-    std::cout << "-----------\n";
-    printMatkulSiswa(mlls, mllm);
 
     std::cout << "-----------\n >> delete siswa: deni\n";
     deleteSiswa(mlls, deni);
     std::cout << "-----------\n";
     printSiswaMatkul(mlls, mllm);
-    std::cout << "-----------\n";
-    printMatkulSiswa(mlls, mllm);
     std::cout << "-----------\n";
     printMostLeast(mlls, mllm);
 }
