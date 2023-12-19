@@ -5,20 +5,34 @@ int main(){
     MLLSiswa mlls;
     initMLLMatkul(mllm);
     initMLLSiswa(mlls);
-    Siswa *anas = insertSiswa(mlls, "Anas", "F001", 1);
-    Siswa *boris = insertSiswa(mlls, "Boris", "F002", 2);
-    Siswa *ceri = insertSiswa(mlls, "Ceri", "K001", 2);
-    Siswa *deni = insertSiswa(mlls, "Deni", "K001", 1);
+    insertFirstSiswa(mlls, "Anas", "F001", 1); // insert last
+    insertLastSiswa(mlls, "Boris", "F002", 2);
+    insertFirstSiswa(mlls, "Ceri", "K001", 2);
+    insertLastSiswa(mlls, "Deni", "K002", 1);
 
-    Matkul *mtk = insertMatkul(mllm, "matematika", "mtk", 6, 1);
-    Matkul *ipa = insertMatkul(mllm, "ipa", "ipa", 6, 1);
-    Matkul *ips = insertMatkul(mllm, "ips", "ips", 5, 1);
-    Matkul *pkn = insertMatkul(mllm, "pkn", "pkn", 4, 1);
+    insertFirstMatkul(mllm, "matematika", "mtk", 6, 1); // insert first
+    insertLastMatkul(mllm, "ipa", "ipa", 6, 1);
+    insertFirstMatkul(mllm, "ips", "ips", 5, 1);
+    insertLastMatkul(mllm, "pkn", "pkn", 4, 1);
 
-    Matkul *kim = insertMatkul(mllm, "kimia", "kim", 6, 2);
-    Matkul *bio = insertMatkul(mllm, "biologi", "bio", 6, 2);
-    Matkul *sej = insertMatkul(mllm, "sejarah", "sej", 5, 2);
-    Matkul *geo = insertMatkul(mllm, "geografi", "geo", 4, 2);
+    insertFirstMatkul(mllm, "kimia", "kim", 6, 2);
+    insertLastMatkul(mllm, "biologi", "bio", 6, 2);
+    insertFirstMatkul(mllm, "sejarah", "sej", 5, 2);
+    insertLastMatkul(mllm, "geografi", "geo", 4, 2);
+   
+    Siswa *anas = searchSiswa(mlls, "F001");
+    Siswa *boris = searchSiswa(mlls, "F002");
+    Siswa *ceri = searchSiswa(mlls, "K001");
+    Siswa *deni = searchSiswa(mlls, "K002");
+
+    Matkul *mtk = searchMatkul(mllm, "mtk");
+    Matkul *ipa = searchMatkul(mllm, "ipa");
+    Matkul *ips = searchMatkul(mllm, "ips");
+    Matkul *pkn = searchMatkul(mllm, "pkn");
+    Matkul *kim = searchMatkul(mllm, "kim");
+    Matkul *bio = searchMatkul(mllm, "bio");
+    Matkul *sej = searchMatkul(mllm, "sej");
+    Matkul *geo = searchMatkul(mllm, "geo");
 
     connect(anas,  mtk);
     connect(anas,  ipa);
@@ -34,19 +48,23 @@ int main(){
     connect(ceri,  geo);
 
     connect(deni,  pkn);
-    connect(deni,  sej);
-    connect(deni,  geo);
+    connect(deni,  ipa);
+    connect(deni,  ips);
 
     printSiswaMatkul(mlls, mllm);
     std::cout << "-----------\n";
     printMatkulSiswa(mlls, mllm);
+    std::cout << "-----------mencari matkul sejarah\n";
+    sej = searchMatkul(mllm, "sej");
     std::cout << "-----------\n >> delete matkul: sejarah\n";
     deleteMatkul(mlls, mllm, sej);
 
     std::cout << "-----------\n";
     printSiswaMatkul(mlls, mllm);
 
-    std::cout << "-----------\n >> delete siswa: deni\n";
+    std::cout << "-----------mencari siswa dengan NIM K002\n";
+    deni = searchSiswa(mlls, "K001");  
+    std::cout << "-----------\n >> delete siswa: "<<deni->nama<<"\n";
     deleteSiswa(mlls, deni);
     std::cout << "-----------\n";
     printSiswaMatkul(mlls, mllm);

@@ -31,8 +31,10 @@ Siswa *createSiswa(std::string nama, std::string nim, int tingkat);
 void initMLLSiswa(MLLSiswa &mll);
 void initMLLMatkul(MLLMatkul &mll);
 
-Matkul *insertMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks, int tingkat);
-Siswa *insertSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat);
+void insertFirstMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks, int tingkat);
+void insertFirstSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat);
+void insertLastMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks, int tingkat);
+void insertLastSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat);
 
 void deleteSiswa(MLLSiswa &mll, Siswa *s);
 void deleteMatkul(MLLSiswa &mlls, MLLMatkul &mllm, Matkul *m);

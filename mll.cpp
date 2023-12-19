@@ -31,7 +31,17 @@ void initMLLMatkul(MLLMatkul &mll){
     mll.first = nullptr;
 }
 
-Matkul *insertMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks, int tingkat){
+void insertFirstMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks, int tingkat){
+    Matkul *x = createMatkul(nama, kode, sks, tingkat);
+    x->next = mll.first;
+    mll.first = x;
+}
+void insertFirstSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat){
+    Siswa *x = createSiswa(nama, nim, tingkat);
+    x->next = mll.first;
+    mll.first = x;
+}
+void insertLastMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks, int tingkat){
     Matkul *m = mll.first;
     Matkul *x = createMatkul(nama, kode, sks, tingkat);
     if (m==nullptr){
@@ -42,9 +52,8 @@ Matkul *insertMatkul(MLLMatkul &mll, std::string nama, std::string kode, int sks
         }
         m->next = x;
     }
-    return x;
 }
-Siswa *insertSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat){
+void insertLastSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat){
     Siswa *m = mll.first;
     Siswa *x = createSiswa(nama, nim, tingkat);
     if (m==nullptr){
@@ -55,21 +64,27 @@ Siswa *insertSiswa(MLLSiswa &mll, std::string nama, std::string nim, int tingkat
         }
         m->next = x;
     }
-    return x;
 }
 void connect(Siswa *s, Matkul* m){
     if (m->tingkat>s->tingkat){
         std::cout << "tingkat siswa dibawah tingkat mata pelajaran\n";
         return;
-    }
-    Koneksi *k = s->koneksi;
-    if (k==nullptr){
-        s->koneksi = createKoneksi(m);
-    } if (k!=nullptr) {
-        while (k->next!=nullptr){
-            k=k->next;
+    } else {
+        Koneksi *k = s->koneksi;
+        int total_sks = 0;
+        if (k==nullptr){
+            s->koneksi = createKoneksi(m);
+        } if (k!=nullptr) {
+            while (k->next!=nullptr){
+                k=k->next;
+                total_sks += k->mk->sks;
+            }
+            if (total_sks>24){
+                std::cout << "terlalu banyak sks\n";
+            } else {
+                k->next = createKoneksi(m);
+            }
         }
-        k->next = createKoneksi(m);
     }
 }
 bool connected(Siswa *s, Matkul *m){
@@ -88,6 +103,7 @@ Matkul *searchMatkul(MLLMatkul mll, std::string kode){
         if (m->kode==kode){
             return m;
         }
+        m = m->next;
     }
     return nullptr;
 }
@@ -97,6 +113,7 @@ Siswa *searchSiswa(MLLSiswa mll, std::string nim){
         if (s->nim==nim){
             return s;
         }
+        s = s->next;
     }
     return nullptr;
 }
