@@ -71,10 +71,11 @@ void connect(Siswa *s, Matkul* m){
         return;
     } else {
         Koneksi *k = s->koneksi;
-        int total_sks = 0;
+        int total_sks;
         if (k==nullptr){
             s->koneksi = createKoneksi(m);
         } if (k!=nullptr) {
+            total_sks = k->mk->sks;
             while (k->next!=nullptr){
                 k=k->next;
                 total_sks += k->mk->sks;
